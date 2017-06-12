@@ -1,15 +1,17 @@
 class Bank
-  #attr_reader :balance
   def initialize
-    @balance = 0
+    @transactions = []
   end
-  def balance
-    @balance
+  def check_balance
+    @transactions.sum
   end
   def deposit(amount)
-    @balance =+ amount
+    @transactions.push(amount)
   end
   def withdraw(amount)
-    @balance =- amount
+    @transactions.push(-amount)
+  end
+  def statement
+    @transactions
   end
 end
