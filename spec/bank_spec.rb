@@ -21,7 +21,8 @@ describe 'Bank' do
     expect(subject.statement.size).to be 3
   end
   it 'can print out the satement in an aesthetically pleasing manner' do
-    Timecop.freeze(Time.new(2012,01,10)) { subject.deposit(1000) }
+    Timecop.freeze(Time.new(2012,01,10))
+    subject.deposit(1000)
     Timecop.travel(Time.new(2012,01,13))
     subject.deposit(2000)
     Timecop.travel(Time.new(2012,01,14))

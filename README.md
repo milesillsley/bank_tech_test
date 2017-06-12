@@ -2,7 +2,20 @@
 
 This is a practice tech test set by Makers Academy.
 
-##Specification
+The bank has been built with ruby and tested using rspec and the timecop gem.
+
+### Instructions
+
+1. clone this repo
+2. `bundle install`
+3. start your favourite ruby compatible runtime developer console
+4. `require './lib/bank.rb'`
+5. initialise a new Bank with `my_bank_example = Bank.new`
+6. give yourself a load of money with `my_bank_example.deposit(99999999)`
+7. withdraw it using `my_bank_example.withdraw(10)`
+8. check the statement using `my_bank_example.print_statement`
+
+## Specification
 
 ### Requirements
 
