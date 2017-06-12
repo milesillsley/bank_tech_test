@@ -6,4 +6,7 @@ describe 'Bank' do
   it 'can make a deposit of a specified value' do
     expect{ subject.deposit(1000) }.to change{ subject.balance }.by 1000
   end
+  it 'can make a withdrawal of a specified value' do
+    expect{ subject.withdraw(1000) }.to change{ subject.balance }.by -1000
+  end
 end
