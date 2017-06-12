@@ -2,7 +2,6 @@ require './lib/bank.rb'
 
 describe 'Bank' do
   subject{ Bank.new }
-  let(:time) { double Time }
 
   it 'can make a deposit of a specified value' do
     expect{ subject.deposit(1000) }.to change{ subject.balance }.by 1000
@@ -21,16 +20,16 @@ describe 'Bank' do
     subject.withdraw(500)
     expect(subject.statement.size).to be 3
   end
-  xit 'can print out the satement in an aesthetically pleasing manner' do
-    allow(time).to receive(:new).and_return Time.new(2012,01,10)
-    subject.deposit(1000)
-    allow(time).to receive(:new).and_return Time.new(2012,01,13)
+  it 'can print out the satement in an aesthetically pleasing manner' do
+    Timecop.freeze(Time.new(2012,01,10)) { subject.deposit(1000) }
+    Timecop.travel(Time.new(2012,01,13))
     subject.deposit(2000)
-    allow(time).to receive(:new).and_return Time.new(2012,01,14)
+    Timecop.travel(Time.new(2012,01,14))
     subject.withdraw(500)
-    expect(subject.print_statement).to output('date || credit || debit || balance
-                                          14/01/2012 || || 500.00 || 2500.00
-                                          13/01/2012 || 2000.00 || || 3000.00
-                                          10/01/2012 || 1000.00 || || 1000.00')
+    expect{subject.print_statement}.to output(
+'date || credit || debit || balance
+14/01/2012 || || 500.00 || 2500.00
+13/01/2012 || 2000.00 || || 3000.00
+10/01/2012 || 1000.00 || || 1000.00').to_stdout
   end
 end
